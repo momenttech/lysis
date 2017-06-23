@@ -33,6 +33,8 @@ process.once('exit', function(code) {
 // Parse those args m8
 var cliPackage = require('../package');
 var versionFlag = argv.v || argv.version;
+var helpFlag = argv.h || argv.help;
+var dryRun = argv['dry-run'] || false;
 
 // Wire up logging events
 function logEvents(lysisInst) {
@@ -52,7 +54,7 @@ function logEvents(lysisInst) {
   });
 
   lysisInst.on('api-stop', function(url) {
-    console.log('Finished API', '\'' + chalk.cyan(url) + '\'...');
+    console.log(chalk.green('Finished API'), '\'' + chalk.cyan(url) + '\'...');
   });
 
   lysisInst.on('api-error', function(e) {
@@ -61,13 +63,11 @@ function logEvents(lysisInst) {
   });
 
   lysisInst.on('generator-start', function(e) {
-    console.log('Starting', '\'' + chalk.cyan(e.generator) + '\'...');
+    console.log('Starting generator', '\'' + chalk.cyan(e.generator) + '\'...');
   });
 
   lysisInst.on('generator-stop', function(e) {
-    console.log(
-      'Finished', '\'' + chalk.cyan(e.generator) + '\''
-    );
+    console.log(chalk.green('Generator finished'), '\'' + chalk.cyan(e.generator) + '\'');
   });
 
   lysisInst.on('generator-error', function(e) {
@@ -86,10 +86,17 @@ function logEvents(lysisInst) {
 
 // The actual logic
 function handleArguments(env) {
-  if (versionFlag) {
-    console.log('CLI version', cliPackage.version);
+  if (helpFlag) {
+    console.log('This is', chalk.green('lysis'));
+    console.log('Parameters:');
+    console.log('-h\t--help\t\tDisplay this help message');
+    console.log('-v\t--version\tDisplay lysis versions');
+    console.log('\t--dry-run\tStart generators without writing anything');
+  }
+  if (versionFlag || helpFlag) {
+    console.log('CLI version', chalk.magenta(cliPackage.version));
     if (env.modulePackage && typeof env.modulePackage.version !== 'undefined') {
-      console.log('Local version', env.modulePackage.version);
+      console.log('Local version', chalk.magenta(env.modulePackage.version));
     }
     process.exit(0);
   }
@@ -127,6 +134,7 @@ function handleArguments(env) {
 
   // This is what actually loads up the lysis yaml config file
   var config = require(env.configPath);
+  config.dryRun = dryRun;
   console.log('Using lysis file', chalk.magenta(tildify(env.configPath)));
   var lysisInst = require(env.modulePath).core;
   logEvents(lysisInst);
@@ -134,8 +142,8 @@ function handleArguments(env) {
   lysisInst.start(config);
 }
 
-cli.on('require', function(name) {
-  console.log('Requiring external module', chalk.magenta(name));
+cli.on('require', function() {
+  //console.log('Requiring external module', chalk.magenta(name));
 });
 
 cli.on('requireFail', function(name) {
