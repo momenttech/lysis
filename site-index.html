@@ -1,0 +1,231 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Lysis</title>
+		<link rel="stylesheet" href="./assets/css/highlight.min.css">
+		<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./assets/css/tipuesearch.css">
+		<link rel="stylesheet" href="./assets/css/main.css">
+	</head>
+	<body>
+		<header class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="./">Lysis</a> <p class="navbar-text hidden-xs">
+					Pages index
+					</p>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-collapse-1">
+					<form action="./search.html" class="navbar-form navbar-right" role="search">
+						<div class="form-group">
+							<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</header>
+
+		<div class="container">
+			<div class="row">
+				<section id="content" class="col-sm-12">
+					<h1>
+						Pages index
+						<small>12 pages</small>
+					</h1>
+					<div class="list-group list-pages">
+						<a href="./index.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Generate files from JSON LD backend</h2>
+							<p class="list-group-item-text">
+								Lysis Generate files from JSON LD backend Get started 
+
+
+
+
+Generate frontend parts from backend Lysis is a tool to generate files from backend&amp;#39;s JSON LD documentation,
+for example TypeScript classes for Angular, components for React, ... It works well with API Platform. 
+
+
+
+Extensible
+Add generators to your project to add backend-oriented features. 
+
+Project managed
+Lysis configuration is included in the...
+							</p>
+						</a>
+						<a href="./cli.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Lysis CLI</h2>
+							<p class="list-group-item-text">
+								Lysis CLI
+For now, the CLI has only one parameter: dry-run.
+Other configuration is done using the yaml configuration file.
+Start Lysis
+To start Lysis, in the project folder, containing lysis.yml:
+lysis
+Every APIs in lysis.yml are read, every generators are started and files are written.
+The dry run parameter
+The dry-run parameters is mostly useful to test...
+							</p>
+						</a>
+						<a href="./configuration.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Lysis configuration</h2>
+							<p class="list-group-item-text">
+								Lysis configuration
+The configuration file
+Lysis configuration is lysis.yml, in your project folder.
+It follows this scheme:
+apis:
+  &amp;lt;api url 1&amp;gt;:
+    &amp;lt;api level parameters&amp;gt;
+    generators:
+      &amp;lt;generator 1&amp;gt;:
+        &amp;lt;generator level parameters&amp;gt;...
+							</p>
+						</a>
+						<a href="./create-a-generator/generator-parameters.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Generator parameters</h2>
+							<p class="list-group-item-text">
+								Generator parameters
+When starting a generator, Lysis provides an object as parameter containing: rawApi: the raw API result, from parseHydraDocumentation.
+context: the API result enhanced, ready to use in templates to generate files.
+config: the API configuration from the YAML file.
+generatorConfig: the generator configuration, still from the YAML file. Context
+The context is an object with: entrypoint:...
+							</p>
+						</a>
+						<a href="./create-a-generator/handlebars-helpers.html" class="list-group-item">
+							<h2 class="list-group-item-heading">handlebars-helpers</h2>
+							<p class="list-group-item-text">
+								
+							</p>
+						</a>
+						<a href="./create-a-generator/handlebars.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Handlebars</h2>
+							<p class="list-group-item-text">
+								Handlebars
+Lysis uses Handlebars as template engine. Take a look to the documentation for further details.
+Built-in helpers
+Handlebars provides a lot of helpers, such as if or each.
+Lysis provides many more helpers, such as ucc for upper camel case, or jsType to turn JSON LD type into JavaScript type.
+Custom Handlebars helpers
+It is...
+							</p>
+						</a>
+						<a href="./create-a-generator/lysisutils.html" class="list-group-item">
+							<h2 class="list-group-item-heading">LysisUtils methods and helpers</h2>
+							<p class="list-group-item-text">
+								LysisUtils methods and helpers
+Overview
+LysisUtils is a part of Lysis.
+Most of methods required when writing a generator are (or should be) present in LysisUtils.
+Import LysisUtils in your generator
+Include it in the generator:
+var lysisUtils &#x3D; require(&amp;#39;api-lysis&amp;#39;).utils;
+Available methods
+The provided methods: toCamelCase(text, whichCase): change text to camel case. The parameter whichCase is upper or lower...
+							</p>
+						</a>
+						<a href="./create-a-generator/overview.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Create your own generators</h2>
+							<p class="list-group-item-text">
+								Create your own generators
+Overview
+A Lysis generator is a directory with: a dependency to the Lysis package, including LysisUtils
+Handlebars templates
+a generator class Table of contents Lysis methods and helpers
+Handlebars
+Generator parameters
+Use case Best practices write template result in basePath, or in a subfolder ...
+							</p>
+						</a>
+						<a href="./create-a-generator/use-case.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Use case</h2>
+							<p class="list-group-item-text">
+								Use case
+In this example, we will create the TypeScript classes generator.
+The aim is to create one class file per REST resource, with typed properties.
+package.json
+Firstly, create a package.json, as usually, and require Lysis:
+npm install api-lysis --save
+index.js
+Create the core file of the generator: index.js and import utilities:
+var path &#x3D; require(&amp;#39;path&amp;#39;);
+var lysisUtils &#x3D;...
+							</p>
+						</a>
+						<a href="./generators.html" class="list-group-item">
+							<h2 class="list-group-item-heading">List of known generators</h2>
+							<p class="list-group-item-text">
+								List of known generators Lysis TypeScript classes generator
+Lysis Restangular services generator ...
+							</p>
+						</a>
+						<a href="./get-started.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Get started with Lysis</h2>
+							<p class="list-group-item-text">
+								Get started with Lysis
+Install Lysis command
+npm install api-lysis -g
+Note: this step is optional. If you want to start the CLI without global installation, start ./node_modules/.bin/lysis instead of lysis.
+Install Lysis in your dev dependencies
+In your project directory (the one containing package.json):
+npm install api-lysis --save-dev
+Create a configuration file
+Create a file lysis.yml with...
+							</p>
+						</a>
+						<a href="./troubleshooting.html" class="list-group-item">
+							<h2 class="list-group-item-heading">Troubleshooting</h2>
+							<p class="list-group-item-text">
+								Troubleshooting
+Resource names are truncated
+In resources, the first letter of the name are missing. For example, Book name is ook.
+The cause: the API URL contains the trailing slash, and should not.
+For example: it should be http://localhost:8000 (and not http://localhost:8000/).
+Object properties type is string
+For example, with two resources: Book and Review, the...
+							</p>
+						</a>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<footer><p>
+  &copy; <a href="https://mmtt.fr" target="_blank">MomentTech 2017</a>.
+  Code licensed under <a href="https://github.com/momenttech/lysis/blob/master/LICENSE">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
+</p>
+
+<p>
+  <a href="https://github.com/momenttech/lysis" target="_blank">GitHub</a>
+  <a href="http://twitter.com/momenttech_fr" target="_blank">Twitter</a>
+</p>
+</footer>
+
+		<script src="./assets/js/jquery.js"></script>
+		<script src="./assets/js/bootstrap.min.js"></script>
+		<script src="./assets/js/highlight.min.js"></script>
+		<script src="./assets/js/tipuesearch_set.js"></script>
+		<script src="./assets/js/tipuesearch.min.js"></script>
+		<script>
+			$(function() {
+				hljs.initHighlightingOnLoad();
+				$('#tipue_search_input').tipuesearch({
+					mode: 'json',
+					contentLocation: './index.json'
+				});
+
+			});
+		</script>
+		
+		<!-- Generated by Vegetables from '' with format '' - '2017-07-10 23:44:59' -->
+	</body>
+</html>

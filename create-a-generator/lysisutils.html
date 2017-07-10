@@ -1,0 +1,137 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LysisUtils methods and helpers - Lysis</title>
+	<link rel="stylesheet" href="../assets/css/highlight.min.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/tipuesearch.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<p class="navbar-text"><a href="..//"><img src="../lysis-logo.svg"></a></p>
+				<a class="navbar-brand" href="..//">Lysis</a>
+				<p class="navbar-text hidden-xs">LysisUtils methods and helpers</p>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<form action="../search.html" class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..//get-started.html">Get started</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+					      <li role="presentation" class=""><a href="../cli.html">CLI parameters</a></li>
+					      <li role="presentation" class=""><a href="../configuration.html">Lysis configuration file</a></li>
+					      <li role="presentation" class=""><a href="../generators.html">Generators</a></li>
+					      <li role="presentation" class=""><a href="../troubleshooting.html">Troubleshooting</a></li>
+					      <li role="separator" class="divider"></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/overview.html">Create a generator</a></li>
+					      <li role="presentation" class="active"><a href="../create-a-generator/lysisutils.html">Lysis methods and helpers</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/handlebars.html">Handlebars</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/handlebars-helpers.html">Built-in Handlebars helpers</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/generator-parameters.html">Generator parameters</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/use-case.html">Use case</a></li>
+					    </ul>
+					  </li>
+					<li><a href="../create-a-generator/lysisutils-slideshow.html" target="_blank">View as slideshow</a></li>
+					<!--li><a href="../create-a-generator/lysisutils-raw.html">View Markdown</a></li-->
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<nav id="sidebar" class="col-lg-2 col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<div class="toc">
+						<p class="toc-1">
+							<a href="#lysisutils-methods-and-helpers">LysisUtils methods and helpers</a>
+						</p>
+						<p class="toc-2">
+							<a href="#overview">Overview</a>
+						</p>
+						<p class="toc-2">
+							<a href="#import-lysisutils-in-your-generator">Import LysisUtils in your generator</a>
+						</p>
+						<p class="toc-2">
+							<a href="#available-methods">Available methods</a>
+						</p>
+					</div>
+				</ul>
+
+			</nav>
+			<header>
+				<div class="entry-meta text-right">
+
+				</div>
+			</header>
+			<article id="content" class="col-lg-10 col-sm-9">
+				<h1 id="lysisutils-methods-and-helpers">LysisUtils methods and helpers</h1>
+<h2 id="overview">Overview</h2>
+<p>LysisUtils is a part of Lysis.</p>
+<p>Most of methods required when writing a generator are (or should be) present in LysisUtils.</p>
+<h2 id="import-lysisutils-in-your-generator">Import LysisUtils in your generator</h2>
+<p>Include it in the generator:</p>
+<pre><code>var lysisUtils = require(&#39;api-lysis&#39;).utils;
+</code></pre><h2 id="available-methods">Available methods</h2>
+<p>The provided methods:</p>
+<ul>
+<li><code>toCamelCase(text, whichCase)</code>: change text to camel case. The parameter <code>whichCase</code> is <code>upper</code> or <code>lower</code> to enable upper camel case or lower camel case.<br>It is mainly useful when naming generated files from resource name.</li>
+<li><code>registerTemplate(id, path)</code>: register and compile an Handlebars template as <code>id</code>.</li>
+<li><code>createFile(id, dest, context)</code>: create a file from the template designated with <code>id</code>, write it to <code>dest</code>, using the provided <code>context</code> to populate data.</li>
+<li><code>evalTemplate(id, context)</code> is really similar to <code>createFile</code>, except it only returns the transformed template. This is mostly useful to display a message at the end of the generation.</li>
+<li><code>createDir(dir)</code>: create a directory.</li>
+<li><code>exists(path)</code>: check whether a fil or a directory exists.</li>
+<li><code>getHandlebars()</code>: returns the Handlebars object.</li>
+<li><code>getGeneratorTester()</code>: returns the generator tester instance, to test your generator without creating a fake project. More details below.</li>
+</ul>
+<p><code>createFile</code> and <code>createDir</code> only display the result and do not create anything when using the <code>dry-run</code> CLI parameter.</p>
+
+			</article>
+		</div>
+	</div>
+
+	<footer><p>
+  &copy; <a href="https://mmtt.fr" target="_blank">MomentTech 2017</a>.
+  Code licensed under <a href="https://github.com/momenttech/lysis/blob/master/LICENSE">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
+</p>
+
+<p>
+  <a href="https://github.com/momenttech/lysis" target="_blank">GitHub</a>
+  <a href="http://twitter.com/momenttech_fr" target="_blank">Twitter</a>
+</p>
+</footer>
+
+	<script src="../assets/js/jquery.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/highlight.min.js"></script>
+	<script src="../assets/js/tipuesearch_set.js"></script>
+	<script src="../assets/js/tipuesearch.min.js"></script>
+	<script>
+	$(function() {
+		hljs.initHighlightingOnLoad();
+		$('#tipue_search_input').tipuesearch({
+			mode: 'json',
+			contentLocation: '../index.json'
+		});
+	});
+	</script>
+	
+	<!-- Generated by Vegetables from 'create-a-generator/lysisutils.md' with format 'default' - '2017-07-10 23:44:59' -->
+</body>
+</html>

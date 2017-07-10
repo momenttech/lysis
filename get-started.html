@@ -1,0 +1,165 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Get started with Lysis - Lysis</title>
+	<link rel="stylesheet" href="assets/css/highlight.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/tipuesearch.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<p class="navbar-text"><a href="/"><img src="lysis-logo.svg"></a></p>
+				<a class="navbar-brand" href="/">Lysis</a>
+				<p class="navbar-text hidden-xs">Get started with Lysis</p>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<form action="search.html" class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/get-started.html">Get started</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+					      <li role="presentation" class=""><a href="cli.html">CLI parameters</a></li>
+					      <li role="presentation" class=""><a href="configuration.html">Lysis configuration file</a></li>
+					      <li role="presentation" class=""><a href="generators.html">Generators</a></li>
+					      <li role="presentation" class=""><a href="troubleshooting.html">Troubleshooting</a></li>
+					      <li role="separator" class="divider"></li>
+					      <li role="presentation" class=""><a href="create-a-generator/overview.html">Create a generator</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/lysisutils.html">Lysis methods and helpers</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/handlebars.html">Handlebars</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/handlebars-helpers.html">Built-in Handlebars helpers</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/generator-parameters.html">Generator parameters</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/use-case.html">Use case</a></li>
+					    </ul>
+					  </li>
+					<li><a href="get-started-slideshow.html" target="_blank">View as slideshow</a></li>
+					<!--li><a href="get-started-raw.html">View Markdown</a></li-->
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<nav id="sidebar" class="col-lg-2 col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<div class="toc">
+						<p class="toc-1">
+							<a href="#get-started-with-lysis">Get started with Lysis</a>
+						</p>
+						<p class="toc-2">
+							<a href="#install-lysis-command">Install Lysis command</a>
+						</p>
+						<p class="toc-2">
+							<a href="#install-lysis-in-your-dev-dependencies">Install Lysis in your dev dependencies</a>
+						</p>
+						<p class="toc-2">
+							<a href="#create-a-configuration-file">Create a configuration file</a>
+						</p>
+						<p class="toc-2">
+							<a href="#install-generators">Install generators</a>
+						</p>
+						<p class="toc-2">
+							<a href="#start-lysis">Start Lysis</a>
+						</p>
+						<p class="toc-3">
+							<a href="#dry-run-mode">Dry run mode</a>
+						</p>
+						<p class="toc-3">
+							<a href="#normal-mode">Normal mode</a>
+						</p>
+						<p class="toc-3">
+							<a href="#more-details">More details</a>
+						</p>
+					</div>
+				</ul>
+
+			</nav>
+			<header>
+				<div class="entry-meta text-right">
+
+				</div>
+			</header>
+			<article id="content" class="col-lg-10 col-sm-9">
+				<h1 id="get-started-with-lysis">Get started with Lysis</h1>
+<h2 id="install-lysis-command">Install Lysis command</h2>
+<pre><code>npm install api-lysis -g
+</code></pre><p>Note: this step is optional. If you want to start the CLI without global installation, start <code>./node_modules/.bin/lysis</code> instead of <code>lysis</code>.</p>
+<h2 id="install-lysis-in-your-dev-dependencies">Install Lysis in your dev dependencies</h2>
+<p>In your project directory (the one containing <code>package.json</code>):</p>
+<pre><code>npm install api-lysis --save-dev
+</code></pre><h2 id="create-a-configuration-file">Create a configuration file</h2>
+<p>Create a file <code>lysis.yml</code> with this content:</p>
+<pre><code>apis:
+  http://localhost:8000:
+    basePath: &#39;backend&#39;
+    hydraPrefix: &#39;hydra:&#39;
+    generators:
+      lysis-typescript-classes-generator:
+        dir: &#39;classes&#39;
+</code></pre><p>With this file, lysis parses the JSON LD documentation of the REST API at <code>http://localhost:8000</code> and apply the temlates of the generator <code>lysis-typescript-classes-generator</code>.<br>The result is written in <code>backend/classes</code>.</p>
+<h2 id="install-generators">Install generators</h2>
+<p>Our configuration file is set to use the generator <code>lysis-typescript-classes-generator</code>. It must be installed, as dev dependency:</p>
+<pre><code>npm install lysis-typescript-classes-generator --save-dev
+</code></pre><h2 id="start-lysis">Start Lysis</h2>
+<h3 id="dry-run-mode">Dry run mode</h3>
+<p>Start the CLI with the <code>dry-run</code> parameter to display generated files result, without writing it:</p>
+<pre><code>lysis --dry-run
+</code></pre><h3 id="normal-mode">Normal mode</h3>
+<p>To start the CLI, writing results:</p>
+<pre><code>lysis
+</code></pre><h3 id="more-details">More details</h3>
+<ul>
+<li><a href="cli.html">CLI parameters</a></li>
+<li><a href="configuration.html">Lysis configuration file</a></li>
+<li><a href="generators.html">Generators</a></li>
+</ul>
+
+			</article>
+		</div>
+	</div>
+
+	<footer><p>
+  &copy; <a href="https://mmtt.fr" target="_blank">MomentTech 2017</a>.
+  Code licensed under <a href="https://github.com/momenttech/lysis/blob/master/LICENSE">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
+</p>
+
+<p>
+  <a href="https://github.com/momenttech/lysis" target="_blank">GitHub</a>
+  <a href="http://twitter.com/momenttech_fr" target="_blank">Twitter</a>
+</p>
+</footer>
+
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/highlight.min.js"></script>
+	<script src="assets/js/tipuesearch_set.js"></script>
+	<script src="assets/js/tipuesearch.min.js"></script>
+	<script>
+	$(function() {
+		hljs.initHighlightingOnLoad();
+		$('#tipue_search_input').tipuesearch({
+			mode: 'json',
+			contentLocation: 'index.json'
+		});
+	});
+	</script>
+	
+	<!-- Generated by Vegetables from 'get-started.md' with format 'default' - '2017-07-10 23:44:59' -->
+</body>
+</html>

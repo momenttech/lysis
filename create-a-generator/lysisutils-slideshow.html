@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>LysisUtils methods and helpers</title>
+	<link rel="stylesheet" href="../assets/css/reveal/reveal.css">
+	<link rel="stylesheet" href="../assets/css/reveal/theme/white.css">
+	<link rel="stylesheet" href="../assets/css/highlight-hybrid.css">
+	<link rel="stylesheet" href="../assets/css/slideshow.css">
+	<style>
+	</style>
+	<!--  -->
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown
+			data-separator="(^#HSLIDE$|^#HSLIDE\?.*)"
+			data-separator-vertical="(^#VSLIDE$|^#VSLIDE\?.*)"
+			data-separator-notes="^Presentation note:"
+			data-charset="utf-8">
+			<script type="text/template">
+				# LysisUtils methods and helpers
+#HSLIDE
+
+## Overview
+LysisUtils is a part of Lysis.
+
+Most of methods required when writing a generator are (or should be) present in LysisUtils.
+
+#HSLIDE
+
+## Import LysisUtils in your generator
+Include it in the generator:
+
+```
+var lysisUtils = require('api-lysis').utils;
+```
+#HSLIDE
+
+## Available methods
+The provided methods:
+
+
+- `toCamelCase(text, whichCase)`: change text to camel case. The parameter `whichCase` is `upper` or `lower` to enable upper camel case or lower camel case.  
+It is mainly useful when naming generated files from resource name.
+- `registerTemplate(id, path)`: register and compile an Handlebars template as `id`.
+- `createFile(id, dest, context)`: create a file from the template designated with `id`, write it to `dest`, using the provided `context` to populate data.
+- `evalTemplate(id, context)` is really similar to `createFile`, except it only returns the transformed template. This is mostly useful to display a message at the end of the generation.
+- `createDir(dir)`: create a directory.
+- `exists(path)`: check whether a fil or a directory exists.
+- `getHandlebars()`: returns the Handlebars object.
+- `getGeneratorTester()`: returns the generator tester instance, to test your generator without creating a fake project. More details below.
+
+`createFile` and `createDir` only display the result and do not create anything when using the `dry-run` CLI parameter.
+
+
+			</script>
+		</section>
+	</div>
+</div>
+
+<script src="../assets/js/reveal/reveal.js"></script>
+<script src="../assets/js/reveal/lib/head.min.js"></script>
+<script src="../assets/js/jquery.js"></script>
+<script>
+Reveal.initialize({
+	embedded: true,
+	margin: 0.0,
+	showNotes: false,
+	transition: 'slide',
+	autoSlide: 0,
+	loop: false,
+	center: true,
+	rtl: false,
+	shuffle: false,
+	mouseWheel: false,
+	history: true,
+
+	// disabled for now
+	// math: {
+	// 	mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+	// 	config: 'TeX-AMS_HTML-full'
+	// },
+
+	dependencies: [
+		{ src: "../assets/js/reveal/plugin/markdown/marked.js"},
+		{ src: "../assets/js/reveal/plugin/markdown/markdown.js"},
+		{ src: "../assets/js/reveal/plugin/notes/notes.js"},
+		// { src: "../assets/js/reveal/plugin/math/math.js", async: true }
+		{ src: "../assets/js/reveal/plugin/highlight/highlight.js", async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+	]
+});
+
+Reveal.configure({
+	keyboard: {
+		67: function() { // bind "s" key to "select" code block content
+
+		var currentSlide = Reveal.getCurrentSlide();
+		var preBlock = $(currentSlide).find("pre");
+
+		if(preBlock.length > 0) {
+
+			if (window.getSelection) {
+				var range = document.createRange();
+				range.selectNodeContents(preBlock[0]);
+				var selection = window.getSelection();
+				selection.removeAllRanges();
+				selection.addRange(range);
+			}
+		}
+	}
+}
+});
+
+</script>
+
+</body>
+</html>

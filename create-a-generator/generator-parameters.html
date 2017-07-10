@@ -1,0 +1,180 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Generator parameters - Lysis</title>
+	<link rel="stylesheet" href="../assets/css/highlight.min.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/tipuesearch.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<p class="navbar-text"><a href="..//"><img src="../lysis-logo.svg"></a></p>
+				<a class="navbar-brand" href="..//">Lysis</a>
+				<p class="navbar-text hidden-xs">Generator parameters</p>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<form action="../search.html" class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..//get-started.html">Get started</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+					      <li role="presentation" class=""><a href="../cli.html">CLI parameters</a></li>
+					      <li role="presentation" class=""><a href="../configuration.html">Lysis configuration file</a></li>
+					      <li role="presentation" class=""><a href="../generators.html">Generators</a></li>
+					      <li role="presentation" class=""><a href="../troubleshooting.html">Troubleshooting</a></li>
+					      <li role="separator" class="divider"></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/overview.html">Create a generator</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/lysisutils.html">Lysis methods and helpers</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/handlebars.html">Handlebars</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/handlebars-helpers.html">Built-in Handlebars helpers</a></li>
+					      <li role="presentation" class="active"><a href="../create-a-generator/generator-parameters.html">Generator parameters</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/use-case.html">Use case</a></li>
+					    </ul>
+					  </li>
+					<li><a href="../create-a-generator/generator-parameters-slideshow.html" target="_blank">View as slideshow</a></li>
+					<!--li><a href="../create-a-generator/generator-parameters-raw.html">View Markdown</a></li-->
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<nav id="sidebar" class="col-lg-2 col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<div class="toc">
+						<p class="toc-2">
+							<a href="#generator-parameters">Generator parameters</a>
+						</p>
+						<p class="toc-3">
+							<a href="#context">Context</a>
+						</p>
+						<p class="toc-3">
+							<a href="#type-properties">Type properties</a>
+						</p>
+						<p class="toc-3">
+							<a href="#config">Config</a>
+						</p>
+						<p class="toc-3">
+							<a href="#generatorconfig">GeneratorConfig</a>
+						</p>
+					</div>
+				</ul>
+
+			</nav>
+			<header>
+				<div class="entry-meta text-right">
+
+				</div>
+			</header>
+			<article id="content" class="col-lg-10 col-sm-9">
+				<h2 id="generator-parameters">Generator parameters</h2>
+<p>When starting a generator, Lysis provides an object as parameter containing:</p>
+<ul>
+<li><code>rawApi</code>: the raw API result, from <a href="https://github.com/dunglas/api-doc-parser">parseHydraDocumentation</a>.</li>
+<li><code>context</code>: the API result enhanced, ready to use in templates to generate files.</li>
+<li><code>config</code>: the API configuration from the YAML file.</li>
+<li><code>generatorConfig</code>: the generator configuration, still from the YAML file.</li>
+</ul>
+<h3 id="context">Context</h3>
+<p>The context is an object with:</p>
+<ul>
+<li><code>entrypoint</code>: the entrypoint URI, i.e. the API URI</li>
+<li><code>title</code>: the API title</li>
+<li><code>resources</code>: an object containing the API resources, as (resource name =&gt; resource properties)</li>
+</ul>
+<h4 id="resource-properties">Resource properties</h4>
+<ul>
+<li><code>name</code>: the resource name, for example <code>books</code></li>
+<li><code>title</code>: the resource title, for example <code>Book</code></li>
+<li><code>url</code>: the resource URL, for example <code>http://127.0.0.1:8000/books</code></li>
+<li><code>fields</code>: the resource fields, as (field name =&gt; field properties)</li>
+</ul>
+<h4 id="field-properties">Field properties</h4>
+<ul>
+<li><code>name</code>: the field name, for example <code>id</code></li>
+<li><code>description</code>: the field description</li>
+<li><code>type</code>: an object containing type properties</li>
+<li><code>required</code>: a boolean</li>
+<li><code>readable</code>: a boolean</li>
+<li><code>writable</code>: a boolean</li>
+</ul>
+<h3 id="type-properties">Type properties</h3>
+<ul>
+<li><code>type</code>:</li>
+<li><code>scalar</code>:</li>
+<li><code>range</code>:</li>
+<li><code>id</code>:</li>
+<li><code>resource</code>:</li>
+</ul>
+<p>The type is:</p>
+<ul>
+<li>integer</li>
+<li>decimal</li>
+<li>string</li>
+<li>boolean</li>
+<li>date</li>
+<li>time</li>
+<li>dateTime</li>
+<li>email</li>
+<li>url</li>
+<li>bla bla type...</li>
+</ul>
+<h3 id="config">Config</h3>
+<p>It is an object containing:</p>
+<ul>
+<li><code>basePath</code>: the base directory, in which create sub directories and write files</li>
+<li><code>hydraPrefix</code>: the hydra prefix, mostly used to retrieve field documentation.</li>
+</ul>
+<h3 id="generatorconfig">GeneratorConfig</h3>
+<p>It is an object, it depends on your generator.</p>
+
+			</article>
+		</div>
+	</div>
+
+	<footer><p>
+  &copy; <a href="https://mmtt.fr" target="_blank">MomentTech 2017</a>.
+  Code licensed under <a href="https://github.com/momenttech/lysis/blob/master/LICENSE">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
+</p>
+
+<p>
+  <a href="https://github.com/momenttech/lysis" target="_blank">GitHub</a>
+  <a href="http://twitter.com/momenttech_fr" target="_blank">Twitter</a>
+</p>
+</footer>
+
+	<script src="../assets/js/jquery.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/highlight.min.js"></script>
+	<script src="../assets/js/tipuesearch_set.js"></script>
+	<script src="../assets/js/tipuesearch.min.js"></script>
+	<script>
+	$(function() {
+		hljs.initHighlightingOnLoad();
+		$('#tipue_search_input').tipuesearch({
+			mode: 'json',
+			contentLocation: '../index.json'
+		});
+	});
+	</script>
+	
+	<!-- Generated by Vegetables from 'create-a-generator/generator-parameters.md' with format 'default' - '2017-07-10 23:44:59' -->
+</body>
+</html>

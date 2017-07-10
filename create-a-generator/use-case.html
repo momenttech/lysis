@@ -1,0 +1,197 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Use case - Lysis</title>
+	<link rel="stylesheet" href="../assets/css/highlight.min.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/tipuesearch.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<p class="navbar-text"><a href="..//"><img src="../lysis-logo.svg"></a></p>
+				<a class="navbar-brand" href="..//">Lysis</a>
+				<p class="navbar-text hidden-xs">Use case</p>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<form action="../search.html" class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..//get-started.html">Get started</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+					      <li role="presentation" class=""><a href="../cli.html">CLI parameters</a></li>
+					      <li role="presentation" class=""><a href="../configuration.html">Lysis configuration file</a></li>
+					      <li role="presentation" class=""><a href="../generators.html">Generators</a></li>
+					      <li role="presentation" class=""><a href="../troubleshooting.html">Troubleshooting</a></li>
+					      <li role="separator" class="divider"></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/overview.html">Create a generator</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/lysisutils.html">Lysis methods and helpers</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/handlebars.html">Handlebars</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/handlebars-helpers.html">Built-in Handlebars helpers</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/generator-parameters.html">Generator parameters</a></li>
+					      <li role="presentation" class="active"><a href="../create-a-generator/use-case.html">Use case</a></li>
+					    </ul>
+					  </li>
+					<li><a href="../create-a-generator/use-case-slideshow.html" target="_blank">View as slideshow</a></li>
+					<!--li><a href="../create-a-generator/use-case-raw.html">View Markdown</a></li-->
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<nav id="sidebar" class="col-lg-2 col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<div class="toc">
+						<p class="toc-1">
+							<a href="#use-case">Use case</a>
+						</p>
+						<p class="toc-3">
+							<a href="#package-json">package.json</a>
+						</p>
+						<p class="toc-3">
+							<a href="#index-js">index.js</a>
+						</p>
+						<p class="toc-3">
+							<a href="#test-the-generator">Test the generator</a>
+						</p>
+						<p class="toc-3">
+							<a href="#templates">Templates</a>
+						</p>
+					</div>
+				</ul>
+
+			</nav>
+			<header>
+				<div class="entry-meta text-right">
+
+				</div>
+			</header>
+			<article id="content" class="col-lg-10 col-sm-9">
+				<h1 id="use-case">Use case</h1>
+<p>In this example, we will create the TypeScript classes generator.</p>
+<p>The aim is to create one class file per REST resource, with typed properties.</p>
+<h3 id="package-json">package.json</h3>
+<p>Firstly, create a <code>package.json</code>, as usually, and require Lysis:</p>
+<pre><code>npm install api-lysis --save
+</code></pre><h3 id="index-js">index.js</h3>
+<p>Create the core file of the generator: <code>index.js</code> and import utilities:</p>
+<pre><code>var path = require(&#39;path&#39;);
+var lysisUtils = require(&#39;api-lysis&#39;).utils;
+var handlebars = lysisUtils.getHandlebars();
+</code></pre><p>Create a new class generator, here <code>tsClassesGenerator</code>:</p>
+<pre><code>var tsClassesGenerator = function(parameters) {
+
+  var templatePath = path.join(__dirname, &#39;templates&#39;);
+
+  // templates
+  lysisUtils.registerTemplate(&#39;base-class&#39;, path.join(templatePath, &#39;base-class.ts.tpl&#39;));
+  lysisUtils.registerTemplate(&#39;extended-class&#39;, path.join(templatePath, &#39;extended-class.ts.tpl&#39;));
+  lysisUtils.registerTemplate(&#39;index&#39;, path.join(templatePath, &#39;index.ts.tpl&#39;));
+
+  var basePath = path.join(parameters.config.basePath, (parameters.generatorConfig.dir ? parameters.generatorConfig.dir : &#39;backend-classes&#39;));
+
+  lysisUtils.createDir(path.join(basePath, &#39;base&#39;));
+
+  // create resources files from templates
+  for (var resourceName in parameters.context.resources) {
+    var resource = parameters.context.resources[resourceName];
+    var context = { resource: resource };
+    var className = lysisUtils.toCamelCase(resource.title, &#39;upper&#39;);
+
+    lysisUtils.createFile(&#39;base-class&#39;, `${basePath}/base/${className}Base.ts`, context);
+    // if extended-class target files exists, do not overwrite (except when required from config)
+    if (!lysisUtils.exists(`${basePath}/${className}.ts`)) {
+      lysisUtils.createFile(&#39;extended-class&#39;, `${basePath}/${className}.ts`, context);
+    }
+  }
+
+  // create index file
+  lysisUtils.createFile(&#39;index&#39;, `${basePath}/index.ts`, parameters.context);
+};
+
+module.exports = tsClassesGenerator;
+</code></pre><ol>
+<li>When starting generators, Lysis provides one parameter (here: <code>parameters</code>) containing API resources.</li>
+<li><code>templatePath</code> contains the path of the directory containing templates.</li>
+<li>Three templates are registered and will be used later in the generator.</li>
+<li>The target directory structure is created.</li>
+<li>For each resource in provided <code>parameters</code>, create the base class and the inherited empty version of the class. The resource is provided as a context to <code>createFile</code> calls.</li>
+<li>The index file is created once classes are generated.</li>
+</ol>
+<p>For further details, take a look to the <a href="???">TypeScript classes generator</a> and the <a href="???">index.js file</a>.</p>
+<h3 id="test-the-generator">Test the generator</h3>
+<p>Lysis provides a generator tester to get generator result without creating a frontend application.</p>
+<p>At the end of <code>index.js</code>, add these lines:</p>
+<pre><code>if (require.main === module) {
+  lysisUtils.getGeneratorTester()
+  .setUrl(&#39;http://127.0.0.1:8000&#39;)
+  .setGenerator(tsClassesGenerator)
+  .test();
+}
+</code></pre><p>This code is executed only when <code>index.js</code> is called directly, i.e. not when using the Lysis CLI. In other words, it is executing when starting: <code>node index.js</code>.</p>
+<p>In test mode, the generator is started in dry run mode: it displays results only and does not created any directories or files.</p>
+<h3 id="templates">Templates</h3>
+<p>This is an extract of the template generating base classes, <code>templates/base-class.ts.tpl</code>:</p>
+<pre><code>// This file should not be modified, as it can be overwritten by the generator.
+// The &#39;{{ ucc resource.title }}&#39; class is here for customizations and will not be touched.
+
+export class {{ ucc resource.title }}Base {
+  {{#each resource.fields}}
+  {{#unless writable}}readonly {{/unless}}{{ name }}: {{ jsType type }};
+  {{/each}}
+}
+</code></pre><ol>
+<li>The class name is the <code>resource.title</code> transformed as upped camel case.</li>
+<li>For each field of the resouce, <code>readonly</code> is added if the field is not writable, the name is displayed and the type transformed thanks to the <code>jsType</code> helper (e.g. <code>integer</code> is turned into <code>number</code>).</li>
+</ol>
+
+			</article>
+		</div>
+	</div>
+
+	<footer><p>
+  &copy; <a href="https://mmtt.fr" target="_blank">MomentTech 2017</a>.
+  Code licensed under <a href="https://github.com/momenttech/lysis/blob/master/LICENSE">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
+</p>
+
+<p>
+  <a href="https://github.com/momenttech/lysis" target="_blank">GitHub</a>
+  <a href="http://twitter.com/momenttech_fr" target="_blank">Twitter</a>
+</p>
+</footer>
+
+	<script src="../assets/js/jquery.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/highlight.min.js"></script>
+	<script src="../assets/js/tipuesearch_set.js"></script>
+	<script src="../assets/js/tipuesearch.min.js"></script>
+	<script>
+	$(function() {
+		hljs.initHighlightingOnLoad();
+		$('#tipue_search_input').tipuesearch({
+			mode: 'json',
+			contentLocation: '../index.json'
+		});
+	});
+	</script>
+	
+	<!-- Generated by Vegetables from 'create-a-generator/use-case.md' with format 'default' - '2017-07-10 23:44:59' -->
+</body>
+</html>

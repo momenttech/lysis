@@ -1,0 +1,162 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lysis configuration - Lysis</title>
+	<link rel="stylesheet" href="assets/css/highlight.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/tipuesearch.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<p class="navbar-text"><a href="/"><img src="lysis-logo.svg"></a></p>
+				<a class="navbar-brand" href="/">Lysis</a>
+				<p class="navbar-text hidden-xs">Lysis configuration</p>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<form action="search.html" class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/get-started.html">Get started</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+					      <li role="presentation" class=""><a href="cli.html">CLI parameters</a></li>
+					      <li role="presentation" class="active"><a href="configuration.html">Lysis configuration file</a></li>
+					      <li role="presentation" class=""><a href="generators.html">Generators</a></li>
+					      <li role="presentation" class=""><a href="troubleshooting.html">Troubleshooting</a></li>
+					      <li role="separator" class="divider"></li>
+					      <li role="presentation" class=""><a href="create-a-generator/overview.html">Create a generator</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/lysisutils.html">Lysis methods and helpers</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/handlebars.html">Handlebars</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/handlebars-helpers.html">Built-in Handlebars helpers</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/generator-parameters.html">Generator parameters</a></li>
+					      <li role="presentation" class=""><a href="create-a-generator/use-case.html">Use case</a></li>
+					    </ul>
+					  </li>
+					<li><a href="configuration-slideshow.html" target="_blank">View as slideshow</a></li>
+					<!--li><a href="configuration-raw.html">View Markdown</a></li-->
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<nav id="sidebar" class="col-lg-2 col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<div class="toc">
+						<p class="toc-1">
+							<a href="#lysis-configuration">Lysis configuration</a>
+						</p>
+						<p class="toc-2">
+							<a href="#the-configuration-file">The configuration file</a>
+						</p>
+						<p class="toc-2">
+							<a href="#parameters">Parameters</a>
+						</p>
+						<p class="toc-3">
+							<a href="#api-level-parameters">API level parameters</a>
+						</p>
+						<p class="toc-3">
+							<a href="#generator-level-parameters">Generator level parameters</a>
+						</p>
+						<p class="toc-2">
+							<a href="#example">Example</a>
+						</p>
+					</div>
+				</ul>
+
+			</nav>
+			<header>
+				<div class="entry-meta text-right">
+
+				</div>
+			</header>
+			<article id="content" class="col-lg-10 col-sm-9">
+				<h1 id="lysis-configuration">Lysis configuration</h1>
+<h2 id="the-configuration-file">The configuration file</h2>
+<p>Lysis configuration is <code>lysis.yml</code>, in your project folder.</p>
+<p>It follows this scheme:</p>
+<pre><code>apis:
+  &lt;api url 1&gt;:
+    &lt;api level parameters&gt;
+    generators:
+      &lt;generator 1&gt;:
+        &lt;generator level parameters&gt;
+      &lt;generator 2&gt;:
+        &lt;...&gt;
+  &lt;api url 1&gt;:
+    &lt;...&gt;
+</code></pre><p>It means that:</p>
+<ul>
+<li>it is possible to work with many APIs in the same project</li>
+<li>it is possible to work with many generators in the same API</li>
+</ul>
+<h2 id="parameters">Parameters</h2>
+<h3 id="api-level-parameters">API level parameters</h3>
+<p>For now, two parameters are available for each API:</p>
+<ul>
+<li><code>basePath</code>: the base directory where other generators write files. Default value: ``.</li>
+<li><code>hydraPrefix</code>: the hydra prefix. Default value: <code>hydra:</code>.</li>
+</ul>
+<h3 id="generator-level-parameters">Generator level parameters</h3>
+<p>Generator level parameters are specific to the generator.</p>
+<p>Take a look to the generator documentation for further details.</p>
+<h2 id="example">Example</h2>
+<pre><code>apis:
+  http://localhost:8000:
+    basePath: &#39;src/app/backend&#39;
+    hydraPrefix: &#39;hydra:&#39;
+    generators:
+      lysis-typescript-classes-generator:
+        dir: &#39;classes&#39;
+      lysis-restangular-services-generator:
+        dir: &#39;services&#39;
+</code></pre>
+			</article>
+		</div>
+	</div>
+
+	<footer><p>
+  &copy; <a href="https://mmtt.fr" target="_blank">MomentTech 2017</a>.
+  Code licensed under <a href="https://github.com/momenttech/lysis/blob/master/LICENSE">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
+</p>
+
+<p>
+  <a href="https://github.com/momenttech/lysis" target="_blank">GitHub</a>
+  <a href="http://twitter.com/momenttech_fr" target="_blank">Twitter</a>
+</p>
+</footer>
+
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/highlight.min.js"></script>
+	<script src="assets/js/tipuesearch_set.js"></script>
+	<script src="assets/js/tipuesearch.min.js"></script>
+	<script>
+	$(function() {
+		hljs.initHighlightingOnLoad();
+		$('#tipue_search_input').tipuesearch({
+			mode: 'json',
+			contentLocation: 'index.json'
+		});
+	});
+	</script>
+	
+	<!-- Generated by Vegetables from 'configuration.md' with format 'default' - '2017-07-10 23:44:59' -->
+</body>
+</html>

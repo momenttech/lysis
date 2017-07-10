@@ -1,0 +1,128 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Handlebars - Lysis</title>
+	<link rel="stylesheet" href="../assets/css/highlight.min.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/tipuesearch.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+	<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<p class="navbar-text"><a href="..//"><img src="../lysis-logo.svg"></a></p>
+				<a class="navbar-brand" href="..//">Lysis</a>
+				<p class="navbar-text hidden-xs">Handlebars</p>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
+				<form action="../search.html" class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="..//get-started.html">Get started</a></li>
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+					      <li role="presentation" class=""><a href="../cli.html">CLI parameters</a></li>
+					      <li role="presentation" class=""><a href="../configuration.html">Lysis configuration file</a></li>
+					      <li role="presentation" class=""><a href="../generators.html">Generators</a></li>
+					      <li role="presentation" class=""><a href="../troubleshooting.html">Troubleshooting</a></li>
+					      <li role="separator" class="divider"></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/overview.html">Create a generator</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/lysisutils.html">Lysis methods and helpers</a></li>
+					      <li role="presentation" class="active"><a href="../create-a-generator/handlebars.html">Handlebars</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/handlebars-helpers.html">Built-in Handlebars helpers</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/generator-parameters.html">Generator parameters</a></li>
+					      <li role="presentation" class=""><a href="../create-a-generator/use-case.html">Use case</a></li>
+					    </ul>
+					  </li>
+					<li><a href="../create-a-generator/handlebars-slideshow.html" target="_blank">View as slideshow</a></li>
+					<!--li><a href="../create-a-generator/handlebars-raw.html">View Markdown</a></li-->
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<nav id="sidebar" class="col-lg-2 col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<div class="toc">
+						<p class="toc-1">
+							<a href="#handlebars">Handlebars</a>
+						</p>
+						<p class="toc-2">
+							<a href="#built-in-helpers">Built-in helpers</a>
+						</p>
+						<p class="toc-2">
+							<a href="#custom-handlebars-helpers">Custom Handlebars helpers</a>
+						</p>
+					</div>
+				</ul>
+
+			</nav>
+			<header>
+				<div class="entry-meta text-right">
+
+				</div>
+			</header>
+			<article id="content" class="col-lg-10 col-sm-9">
+				<h1 id="handlebars">Handlebars</h1>
+<p>Lysis uses Handlebars as template engine. Take a look to the <a href="http://handlebarsjs.com/">documentation</a> for further details.</p>
+<h2 id="built-in-helpers">Built-in helpers</h2>
+<p><a href="http://handlebarsjs.com/builtin_helpers.html">Handlebars provides a lot of helpers</a>, such as <code>if</code> or <code>each</code>.</p>
+<p><a href="../create-a-generator/handlebars-helpers.html">Lysis provides many more helpers</a>, such as <code>ucc</code> for upper camel case, or <code>jsType</code> to turn JSON LD type into JavaScript type.</p>
+<h2 id="custom-handlebars-helpers">Custom Handlebars helpers</h2>
+<p>It is also possible to define helpers in your generator.</p>
+<p>The first thing is to import Handlebars from <code>LysisUtils</code>.</p>
+<pre><code>var handlebars = lysisUtils.getHandlebars();
+</code></pre><p>Then, write helpers:</p>
+<pre><code>handlebars.registerHelper(&#39;myHelper&#39;, function(content) {
+  // do some changes
+  return content;
+});
+</code></pre>
+			</article>
+		</div>
+	</div>
+
+	<footer><p>
+  &copy; <a href="https://mmtt.fr" target="_blank">MomentTech 2017</a>.
+  Code licensed under <a href="https://github.com/momenttech/lysis/blob/master/LICENSE">MIT</a>, documentation under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.
+</p>
+
+<p>
+  <a href="https://github.com/momenttech/lysis" target="_blank">GitHub</a>
+  <a href="http://twitter.com/momenttech_fr" target="_blank">Twitter</a>
+</p>
+</footer>
+
+	<script src="../assets/js/jquery.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/highlight.min.js"></script>
+	<script src="../assets/js/tipuesearch_set.js"></script>
+	<script src="../assets/js/tipuesearch.min.js"></script>
+	<script>
+	$(function() {
+		hljs.initHighlightingOnLoad();
+		$('#tipue_search_input').tipuesearch({
+			mode: 'json',
+			contentLocation: '../index.json'
+		});
+	});
+	</script>
+	
+	<!-- Generated by Vegetables from 'create-a-generator/handlebars.md' with format 'default' - '2017-07-10 23:44:59' -->
+</body>
+</html>
