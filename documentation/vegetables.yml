@@ -1,0 +1,31 @@
+tags:
+  globalTitle: Lysis
+  menuLabel: Documentation
+  menu:
+    - uri: cli.html
+      label: CLI parameters
+    - uri: configuration.html
+      label: Lysis configuration file
+    - uri: generators.html
+      label: Generators
+    - uri: troubleshooting.html
+      label: Troubleshooting
+      split: true
+
+    - uri: create-a-generator/overview.html
+      label: Create a generator
+    - uri: create-a-generator/lysisutils.html
+      label: Lysis methods and helpers
+    - uri: create-a-generator/handlebars.html
+      label: Handlebars
+    - uri: create-a-generator/handlebars-helpers.html
+      label: Built-in Handlebars helpers
+    - uri: create-a-generator/generator-parameters.html
+      label: Generator parameters
+    - uri: create-a-generator/use-case.html
+      label: Use case
+
+pageOptions:
+  README.md:
+    layout: homepage
+    title: Generate files from JSON LD backend

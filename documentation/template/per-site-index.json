@@ -1,0 +1,7 @@
+{
+	"pages": [
+		{{#each pages}}
+		{"title": "{{title}}", "text": {{{json (textize html)}}}, "tags": "", "url": "{{uri}}"}{{#unless @last}},{{/unless}}
+		{{/each}}
+	]
+}

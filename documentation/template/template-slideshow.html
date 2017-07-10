@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>{{title}}</title>
+	<link rel="stylesheet" href="{{{baseUri}}}assets/css/reveal/reveal.css">
+	<link rel="stylesheet" href="{{{baseUri}}}assets/css/reveal/theme/{{default slideshow.theme 'white'}}.css">
+	<link rel="stylesheet" href="{{{baseUri}}}assets/css/highlight-hybrid.css">
+	<link rel="stylesheet" href="{{{baseUri}}}assets/css/slideshow.css">
+	<style>
+	{{#if slideshow.logoUrl}}
+	.reveal .slides::after {
+		background-image: url("{{{slideshow.logoUrl}}}");
+		background-repeat: no-repeat;
+		content: "";
+		height: 100px;
+		left: 15px;
+		position: absolute;
+		right: 15px;
+		{{#eq slideshow.logoPositionY 'top'}}
+		top: 0;
+		{{else}}
+		bottom: 0;
+		{{/eq}}
+
+		{{#if slideshow.logoPositionX}}
+		background-position: {{slideshow.logoPositionX}};
+		{{else}}
+		background-position: left;
+		{{/if}}
+	}
+	{{/if}}
+	</style>
+	<!-- {{slideshow.theme}} -->
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown
+			data-separator="(^#HSLIDE$|^#HSLIDE\?.*)"
+			data-separator-vertical="(^#VSLIDE$|^#VSLIDE\?.*)"
+			data-separator-notes="^Presentation note:"
+			data-charset="utf-8">
+			<script type="text/template">
+				{{{slideMarkdown}}}
+			</script>
+		</section>
+	</div>
+</div>
+
+<script src="{{{baseUri}}}assets/js/reveal/reveal.js"></script>
+<script src="{{{baseUri}}}assets/js/reveal/lib/head.min.js"></script>
+<script src="{{{baseUri}}}assets/js/jquery.js"></script>
+<script>
+Reveal.initialize({
+	embedded: true,
+	margin: 0.0,
+	showNotes: {{default slideshow.showNotes 'false'}},
+	transition: '{{default slideshow.transition 'slide'}}',
+	autoSlide: {{default slideshow.autoSlide 0}},
+	loop: {{default slideshow.loop 'false'}},
+	center: true,
+	rtl: false,
+	shuffle: false,
+	mouseWheel: false,
+	history: true,
+
+	// disabled for now
+	// math: {
+	// 	mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+	// 	config: 'TeX-AMS_HTML-full'
+	// },
+
+	dependencies: [
+		{ src: "{{{baseUri}}}assets/js/reveal/plugin/markdown/marked.js"},
+		{ src: "{{{baseUri}}}assets/js/reveal/plugin/markdown/markdown.js"},
+		{ src: "{{{baseUri}}}assets/js/reveal/plugin/notes/notes.js"},
+		// { src: "{{{baseUri}}}assets/js/reveal/plugin/math/math.js", async: true }
+		{ src: "{{{baseUri}}}assets/js/reveal/plugin/highlight/highlight.js", async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+	]
+});
+
+Reveal.configure({
+	keyboard: {
+		67: function() { // bind "s" key to "select" code block content
+
+		var currentSlide = Reveal.getCurrentSlide();
+		var preBlock = $(currentSlide).find("pre");
+
+		if(preBlock.length > 0) {
+
+			if (window.getSelection) {
+				var range = document.createRange();
+				range.selectNodeContents(preBlock[0]);
+				var selection = window.getSelection();
+				selection.removeAllRanges();
+				selection.addRange(range);
+			}
+		}
+	}
+}
+});
+
+</script>
+{{{autoReload}}}
+</body>
+</html>

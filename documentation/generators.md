@@ -1,0 +1,4 @@
+# List of known generators
+
+- Lysis TypeScript classes generator
+- Lysis Restangular services generator

@@ -1,16 +1,30 @@
 {
   "name": "api-lysis",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "CLI and engine for code generation from JSON LD APIs",
-  "files": [
-    "*.md",
-    "docs/*.md",
-    "bin",
-    "lib",
-    "templates"
-  ],
   "main": "lib/index",
+  "contributors": [
+    "David Duquenoy"
+  ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/momenttech/lysis"
+  },
+  "bugs": {
+    "url": "https://github.com/momenttech/lysis/issues"
+  },
+  "homepage": "https://momenttech.github.io/lysis",
+  "keywords": [
+    "jsonld",
+    "rest",
+    "api",
+    "cli",
+    "generator",
+    "api-platform",
+    "typescript",
+    "angular"
+  ],
   "devDependencies": {},
   "dependencies": {
     "api-doc-parser": "^0.1.5",
@@ -29,5 +43,6 @@
   "scripts": {},
   "bin": {
     "lysis": "./bin/index.js"
-  }
+  },
+  "readmeFilename": "README.md"
 }
