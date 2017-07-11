@@ -1,6 +1,6 @@
 {
   "name": "api-lysis",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "CLI and engine for code generation from JSON LD APIs",
   "main": "lib/index",
   "contributors": [

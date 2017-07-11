@@ -1,4 +1,6 @@
 # List of known generators
 
-- Lysis TypeScript classes generator
-- Lysis Restangular services generator
+## Angular
+
+- [Lysis TypeScript classes generator](https://github.com/momenttech/lysis-typescript-classes-generator)
+- [Lysis Restangular services generator](https://github.com/momenttech/lysis-restangular-services-generator)

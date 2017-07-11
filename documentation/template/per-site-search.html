@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="{{{baseUri}}}assets/css/main.css">
 	</head>
 	<body>
-		<header class="navbar navbar-default navbar-fixed-top">
+		<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -18,7 +18,9 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{{baseUri}}}">{{{globalTitle}}}</a> <p class="navbar-text hidden-xs">Search results</p>
+					<p class="navbar-text"><a href="{{{baseUri}}}"><img src="{{{baseUri}}}lysis-logo.svg"></a></p>
+					<a class="navbar-brand" href="{{{baseUri}}}">{{{globalTitle}}}</a>
+					<p class="navbar-text hidden-xs">{{{title}}}</p>
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbar-collapse-1">
@@ -27,8 +29,11 @@
 							<input type="text" name="q" id="tipue_search_input" autocomplete="off" required class="form-control" placeholder="Search">
 						</div>
 					</form>
+					<ul class="nav navbar-nav navbar-right">
+						{{> common-menu}}
+						<li><a href="{{{baseUri}}}{{uriByVersion 'slideshow'}}" target="_blank">View as slideshow</a></li>
+					</ul>
 				</div>
-
 			</div>
 		</header>
 

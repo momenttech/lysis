@@ -26,7 +26,7 @@ apis:
         dir: 'classes'
 ```
 
-With this file, lysis parses the JSON LD documentation of the REST API at `http://localhost:8000` and apply the temlates of the generator `lysis-typescript-classes-generator`.  
+With this file, lysis parses the JSON LD documentation of the REST API at `http://localhost:8000` and apply the templates of the generator `lysis-typescript-classes-generator`.  
 The result is written in `backend/classes`.
 
 ## Install generators

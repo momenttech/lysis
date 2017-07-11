@@ -2,7 +2,7 @@
 
 > CLI and engine for code generation from JSON LD APIs
 
-![Lysis](documentation/lysis-logo.svg)
+![Lysis](https://github.com/momenttech/lysis/raw/master/documentation/lysis-logo.svg)
 
 ## Overview
 
