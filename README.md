@@ -11,7 +11,7 @@ Lysis is a tool to generate files from JSON LD documentation, for example TypeSc
 
 It works well with [API Platform](https://api-platform.com/).
 
-Take a look to the documentation for further details.
+Take a look to the [Lysis documentation](https://momenttech.github.io/lysis/) for further details.
 
 ## Todo
 
