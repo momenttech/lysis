@@ -98,6 +98,8 @@ function handleArguments(env) {
     if (env.modulePackage && typeof env.modulePackage.version !== 'undefined') {
       console.log('Local version', chalk.magenta(env.modulePackage.version));
     }
+    console.log('For more informations, check out our site:');
+    console.log('https://momenttech.github.io/lysis/');
     process.exit(0);
   }
 
