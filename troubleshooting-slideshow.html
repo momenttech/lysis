@@ -25,7 +25,7 @@
 #HSLIDE
 
 ## Resource names are truncated
-In resources, the first letter of the name are missing. For example, `Book` name is `ook`.
+In resources, the first letter of the name is missing. For example, `Book` name is `ook`.
 
 The cause: the API URL contains the trailing slash, and should not.
 
@@ -47,8 +47,18 @@ If the range of your `Book` does not follow one of these schemes, let us now.
 #HSLIDE
 
 ## Entity ids are not present from JSON LD docs
-If you use API Platform, upgrade to 2.1.
+If you use API Platform, upgrade to 2.1 (when it will be available).
 
+#HSLIDE
+
+## There is a lot of blank lines in generated files
+This may happen when a dependency of your project uses a different version of Handlebars.
+
+To fix this problem, manually install Handlebars:
+
+```
+npm install handlebars --save-dev
+```
 
 			</script>
 		</section>
