@@ -8,7 +8,7 @@ The aim is to create one class file per REST resource, with typed properties.
 
 Firstly, create a `package.json`, as usually, and require Lysis:
 
-    npm install api-lysis --save
+    npm install api-lysis --save-dev
 
 ### index.js
 
@@ -56,14 +56,14 @@ var tsClassesGenerator = function(parameters) {
 module.exports = tsClassesGenerator;
 ```
 
-1. When starting generators, Lysis provides one parameter (here: `parameters`) containing API resources.
+1. When starting generators, Lysis provides one [parameter](generator-parameters.md) (here: `parameters`) containing API resources.
 2. `templatePath` contains the path of the directory containing templates.
 3. Three templates are registered and will be used later in the generator.
 4. The target directory structure is created.
 5. For each resource in provided `parameters`, create the base class and the inherited empty version of the class. The resource is provided as a context to `createFile` calls.
 7. The index file is created once classes are generated.
 
-For further details, take a look to the [TypeScript classes generator](???) and the [index.js file](???).
+For further details, take a look to the [TypeScript classes generator](https://github.com/momenttech/lysis-typescript-classes-generator) and the [index.js file](https://github.com/momenttech/lysis-typescript-classes-generator/blob/master/index.js).
 
 ### Test the generator
 
@@ -101,3 +101,10 @@ export class {{ ucc resource.title }}Base {
 
 1. The class name is the `resource.title` transformed as upped camel case.
 2. For each field of the resouce, `readonly` is added if the field is not writable, the name is displayed and the type transformed thanks to the `jsType` helper (e.g. `integer` is turned into `number`).
+
+
+## More details
+
+- [Lysis methods and helpers](lysisutils.md)
+- [Handlebars](handlebars.md)
+- [Generator parameters](generator-parameters.md)

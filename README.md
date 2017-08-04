@@ -18,3 +18,4 @@ Take a look to the [Lysis documentation](https://momenttech.github.io/lysis/) fo
 - add documentation to lysis-tester
 - write tests
 - `lysis create-generator <generator name>` to scaffold a new generator
+- display generators version when lysis is started

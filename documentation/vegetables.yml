@@ -14,6 +14,8 @@ tags:
 
     - uri: create-a-generator/overview.html
       label: Create a generator
+    - uri: create-a-generator/use-case.html
+      label: Use case
     - uri: create-a-generator/lysisutils.html
       label: Lysis methods and helpers
     - uri: create-a-generator/handlebars.html
@@ -22,8 +24,6 @@ tags:
       label: Built-in Handlebars helpers
     - uri: create-a-generator/generator-parameters.html
       label: Generator parameters
-    - uri: create-a-generator/use-case.html
-      label: Use case
 
 pageOptions:
   README.md:
