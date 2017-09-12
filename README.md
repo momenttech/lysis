@@ -1,4 +1,4 @@
-# Lysis
+# Lysis
 
 > CLI and engine for code generation from JSON LD APIs
 
@@ -13,7 +13,7 @@ It works well with [API Platform](https://api-platform.com/).
 
 Take a look to the [Lysis documentation](https://momenttech.github.io/lysis/) for further details.
 
-## Todo
+## Todo
 
 - add documentation to lysis-tester
 - write tests
