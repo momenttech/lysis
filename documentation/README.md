@@ -37,7 +37,7 @@ for example TypeScript classes for Angular, components for React, ...</p>
 </div>
 </div>
 
-## Documentation
+## Documentation
 
 - [Get started](get-started.md)
 - [CLI parameters](cli.md)
@@ -45,7 +45,7 @@ for example TypeScript classes for Angular, components for React, ...</p>
 - [Generators](generators.md)
 - [Troubleshooting](troubleshooting.md)
 
-## Write your own generator(s)
+## Write your own generator(s)
 
 - [Create a generator](create-a-generator/overview.md)
 - [Lysis methods and helpers](create-a-generator/lysisutils.md)

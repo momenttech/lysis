@@ -24,7 +24,8 @@ It is mainly useful when naming generated files from resource name.
 - `createFile(id, dest, context)`: create a file from the template designated with `id`, write it to `dest`, using the provided `context` to populate data.
 - `evalTemplate(id, context)` is really similar to `createFile`, except it only returns the transformed template. This is mostly useful to display a message at the end of the generation.
 - `createDir(dir)`: create a directory.
-- `exists(path)`: check whether a fil or a directory exists.
+- `exists(path)`: check whether a file or a directory exists.
+- `copyFile(src, dest)`: copy a file
 - `getHandlebars()`: returns the Handlebars object.
 - `getGeneratorTester()`: returns the generator tester instance, to test your generator without creating a fake project. More details below.
 

@@ -37,7 +37,7 @@ Our configuration file is set to use the generator `lysis-typescript-classes-gen
 
 ## Start Lysis
 
-### Dry run mode
+### Dry run mode
 
 Start the CLI with the `dry-run` parameter to display generated files result, without writing it:
 
@@ -49,7 +49,7 @@ To start the CLI, writing results:
 
     lysis
 
-### More details
+### More details
 
 - [CLI parameters](cli.md)
 - [Lysis configuration file](configuration.md)

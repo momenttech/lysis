@@ -4,7 +4,7 @@ In this example, we will create the TypeScript classes generator.
 
 The aim is to create one class file per REST resource, with typed properties.
 
-### package.json
+### package.json
 
 Firstly, create a `package.json`, as usually, and require Lysis:
 
@@ -84,7 +84,7 @@ This code is executed only when `index.js` is called directly, i.e. not when usi
 
 In test mode, the generator is started in dry run mode: it displays results only and does not created any directories or files.
 
-### Templates
+### Templates
 
 This is an extract of the template generating base classes, `templates/base-class.ts.tpl`:
 
