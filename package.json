@@ -1,6 +1,6 @@
 {
   "name": "api-lysis",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "CLI and engine for code generation from JSON LD APIs",
   "main": "lib/index",
   "contributors": [
@@ -27,12 +27,12 @@
   ],
   "devDependencies": {},
   "dependencies": {
-    "api-doc-parser": "^0.1.5",
+    "api-doc-parser": "^0.2.1",
     "chalk": "^1.1.3",
     "es6-promise": "^4.1.0",
-    "handlebars": "^4.0.8",
+    "handlebars": "^4.5.1",
     "isomorphic-fetch": "^2.2.1",
-    "liftoff": "^2.3.0",
+    "liftoff": "^3.1.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "require-yaml": "^0.0.1",
