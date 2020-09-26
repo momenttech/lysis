@@ -2,7 +2,7 @@
 
 When starting a generator, Lysis provides an object as parameter containing:
 
-- `rawApi`: the raw API result, from [parseHydraDocumentation](https://github.com/dunglas/api-doc-parser).
+- `rawApi`: the raw API result, from [parseHydraDocumentation](https://github.com/api-platform/api-doc-parser).
 - `context`: the API result enhanced, ready to use in templates to generate files.
 - `config`: the API configuration from the YAML file.
 - `generatorConfig`: the generator configuration, still from the YAML file.
