@@ -2,6 +2,8 @@
 
 'use strict';
 
+var fs = require('fs');
+var yaml = require('js-yaml');
 var chalk = require('chalk');
 var semver = require('semver');
 var Liftoff = require('liftoff');
@@ -18,7 +20,8 @@ process.env.INIT_CWD = process.cwd();
 var cli = new Liftoff({
   name: 'api-lysis',
   configName: 'lysis',
-  extensions: { '.yml': 'require-yaml' },
+  // no loader: the yaml file is parsed below, with js-yaml
+  extensions: { '.yml': null },
   v8flags: v8flags,
 });
 
@@ -135,7 +138,7 @@ function handleArguments(env) {
   }
 
   // This is what actually loads up the lysis yaml config file
-  var config = require(env.configPath);
+  var config = yaml.load(fs.readFileSync(env.configPath, 'utf8'));
   config.dryRun = dryRun;
   console.log('Using lysis file', chalk.magenta(tildify(env.configPath)));
   var lysisInst = require(env.modulePath).core;
@@ -144,16 +147,18 @@ function handleArguments(env) {
   lysisInst.start(config);
 }
 
-cli.on('require', function() {
+cli.on('preload:success', function() {
   //console.log('Requiring external module', chalk.magenta(name));
 });
 
-cli.on('requireFail', function(name) {
+cli.on('preload:failure', function(name) {
   console.log(chalk.red('Failed to load external module'), chalk.magenta(name));
 });
 
-cli.launch({
+cli.prepare({
   cwd: argv.cwd,
   configPath: argv.conffile,
-  require: argv.require
-}, handleArguments);
+  preload: argv.require
+}, function(env) {
+  cli.execute(env, handleArguments);
+});
